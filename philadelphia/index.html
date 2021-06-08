@@ -3,10 +3,10 @@
 <head>
     <meta charset='utf-8' />
     <title>NCRC Eviction Risk Index</title>
-	<meta name='robots' content='noindex, nofollow'>
+    <meta name='robots' content='noindex, nofollow'>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
-	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css' rel='stylesheet' />
     <style>
@@ -23,13 +23,13 @@
             margin: 10px;
             text-align: left;
         }
-		#map { 
-			position:absolute; 
-			top:0; 
-			bottom:0; 
-			width:100%; 
-		}
-		.map-overlay {
+        #map { 
+            position:absolute; 
+            top:0; 
+            bottom:0; 
+            width:100%; 
+        }
+        .map-overlay {
             position: fixed;
             right: 40px;
             bottom: 40px;
@@ -41,7 +41,7 @@
             padding: 2px;
             z-index: 1;
         }
-		#features {
+        #features {
             top: 0;
             height: 450px;
             margin-top: 20px;
@@ -69,11 +69,11 @@
 
 <body>
 <style>
-    	.mapboxgl-popup {
-    		max-width: 120px;
-    	    font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        .mapboxgl-popup {
+            max-width: 120px;
+            font: 14px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
             border-radius: 2%;
-    	}
+        }
 </style>
 
 <nav id="menu"></nav>
@@ -95,15 +95,15 @@ var map = new mapboxgl.Map({
 });
 
 map.on('load', function () {
-	
-	// make a pointer cursor
+    
+    // make a pointer cursor
     map.getCanvas().style.cursor = 'default';
 
-	// Round values to nearest whole integer and include thousand seperators.
-	function round(num) {
-		return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-	}
-	
+    // Round values to nearest whole integer and include thousand seperators.
+    function round(num) {
+        return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+    
     // define layer names
     var layers = ['Very Low','Low','Medium','High', 'Very High'];
     var colors = ['#2670c5', '#5cd6ff', '#f5f5f5', '#ff968f', '#c31f13'];
@@ -118,20 +118,20 @@ map.on('load', function () {
         return num.toFixed(1).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
 
-	// Round values to nearest second decimal and include thousand seperators.
-	function decimalRound2(num) {
-		return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-	}
-		
+    // Round values to nearest second decimal and include thousand seperators.
+    function decimalRound2(num) {
+        return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+        
     // When a click event occurs on a feature in the layer, open a popup at the location of the click, with description HTML from its properties.
     map.on('click', 'Eviction Risk Index', function (e) {
-		new mapboxgl.Popup()
+        new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(
             "<h1 style=text-align:center;width:100%;color:#6F6C6C>" + e.features[0].properties.ERIW0L + "</h1>" +
             "<h1 style=text-align:center;width:100%;color:#2670c5>" + e.features[0].properties.ERIW1L + "</h1>" +
             "<h1 style=text-align:center;width:100%;color:#5cd6ff>" + e.features[0].properties.ERIW2L + "</h1>" +
-            "<h1 style=text-align:center;width:100%;color:#C6C6C6>" + e.features[0].properties.ERIW3L + "</h1>" +
+            "<h1 style=text-align:center;width:100%;color:#C5C7B0>" + e.features[0].properties.ERIW3L + "</h1>" +
             "<h1 style=text-align:center;width:100%;color:#ff968f>" + e.features[0].properties.ERIW4L + "</h1>" +
             "<h1 style=text-align:center;width:100%;color:#c31f13>" + e.features[0].properties.ERIW5L + "</h1>" +
             "<table style='width:100%;text-align:center'>" + 
@@ -151,34 +151,41 @@ map.on('load', function () {
             "<p></p>" +
             "<table style='width:100%;text-align:center'>" + 
                 "<tr>" + 
-                    "<th style='width:33%'>Annual Eviction Average</th>" + 
-                    "<th style='width:34%'>Median Household Income</th>" + 
-                    "<th style='width:33%'>Minority Population</th>" +
+                    "<th style='width:30%'>Renter Occupied</th>" + 
+                    "<th style='width:40%'>Median Household Income</th>" + 
+                    "<th style='width:30%'>Minority Population</th>" +
                 "</tr>" + 
                 "<tr style='font-size:20px;text-align:center'>" + 
-                    "<th style='width:30%'>" + 
-                        decimalRound0(e.features[0].properties.FILINGS_AV) + 
+                    "<th style='width:33%'>" + 
+                        decimalRound0(e.features[0].properties.RENTALS) + "%" +
                     "</th>" + 
-                    "<th style='width:40%'>" + 
+                    "<th style='width:34%'>" + 
                         "$" + round(e.features[0].properties.MFI) + 
                     "</th>" + 
-                    "<th style='width:30%'>" + 
+                    "<th style='width:33%'>" + 
                         decimalRound0(e.features[0].properties.MIN) + "%" +
                     "</th>" +
                 "</tr>" +
             "</table>" +
             "<p></p>" +
-            "<table>" +
-                "<tr style='font-size:20px;text-align:center'>" +  
-                    "<th style='width:100%'>" + 
-                        decimalRound0(e.features[0].properties.RENTALS) + "% Renter-Occupied" +
+            "<table style='width:100%;text-align:center'>" + 
+                "<tr>" + 
+                    "<th style='width:50%'>Annual Eviction Average</th>" + 
+                    "<th style='width:50%'>Estimated Deferred Evictions (2020)</th>" + 
+                "</tr>" + 
+                "<tr style='font-size:20px;text-align:center'>" + 
+                    "<th style='width:50%'>" + 
+                        decimalRound0(e.features[0].properties.FILINGS_AV) + 
                     "</th>" + 
+                    "<th style='width:50%'>" + 
+                        decimalRound0(e.features[0].properties.DEFFERED_) +
+                    "</th>" +
                 "</tr>" +
             "</table>"
             )
             .addTo(map);
     });
-	
+    
     // Change the cursor to a pointer when the mouse is over the layer.
     map.on('mouseenter', 'Eviction Risk Index', function () {
         map.getCanvas().style.cursor = 'pointer';
@@ -188,15 +195,15 @@ map.on('load', function () {
     map.on('mouseleave', 'Eviction Risk Index', function () {
         map.getCanvas().style.cursor = '';
     });
-	
-	// Add a search bar to the map.
-	map.addControl(new MapboxGeocoder({
-		accessToken: mapboxgl.accessToken,
-		mapboxgl: mapboxgl
-	}));
-	
-	// Add in option for full-screen.
-	map.addControl(new mapboxgl.FullscreenControl());
+    
+    // Add a search bar to the map.
+    map.addControl(new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    }));
+    
+    // Add in option for full-screen.
+    map.addControl(new mapboxgl.FullscreenControl());
 
     // create legend
     for (i=0; i<layers.length; i++) {
